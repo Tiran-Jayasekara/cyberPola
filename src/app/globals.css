@@ -2,7 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+.font-montserrat {
+  font-family: 'Montserrat', Verdana, Helvetica, Arial, sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+.playfair-font {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+
+
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +43,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
