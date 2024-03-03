@@ -31,7 +31,7 @@ const NavBar = () => {
             >
 
 
-                <button className="flex items-center cursor-pointer" onClick={() => { router.push('/pages/MainPage') }}>
+                <button className="flex items-center cursor-pointer" onClick={() => { router.push('/pages/MainPage'), setOpenNav(false) }}>
                     Home
                 </button>
             </Typography>
@@ -42,9 +42,9 @@ const NavBar = () => {
                 className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
             >
 
-                <a href="#" className="flex items-center">
-                    Market
-                </a>
+                <button className="flex items-center cursor-pointer" onClick={() => { router.push('/pages/shops'), setOpenNav(false) }}>
+                    Shops
+                </button>
             </Typography>
             <Typography
                 as="li"

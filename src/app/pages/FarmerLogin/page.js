@@ -1,5 +1,5 @@
 'use client'
-import NavBar from '@/app/components'
+
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -7,7 +7,6 @@ const FarmerLogin = () => {
     const router = useRouter();
     return (
         <>
-            <NavBar />
             <div className="w-full min-h-screen" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
 
                 {/* Content goes here */}

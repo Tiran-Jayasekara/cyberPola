@@ -1,5 +1,5 @@
 'use client'
-import NavBar from '@/app/components'
+
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -7,7 +7,6 @@ const UserRegister = () => {
     const router = useRouter();
     return (
         <>
-            <NavBar />
             <div className="h-fit w-full" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
 
                 {/* Content goes here */}
@@ -18,7 +17,6 @@ const UserRegister = () => {
                         <img className='relative z-10 mx-auto w-40' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
                     </div>
                     <h1 className=' text-white playfair-font text-center md:text-4xl text-2xl font-bold mx-10 md:mt-20 mt-10 mb-10'>User Register</h1>
-
 
 
                     <form className="mx-auto md:max-w-md w-full">

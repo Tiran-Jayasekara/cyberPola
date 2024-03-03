@@ -1,5 +1,5 @@
 'use client'
-import NavBar from '@/app/components'
+
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -7,7 +7,6 @@ const FarmerRegister = () => {
     const router = useRouter();
     return (
         <>
-            <NavBar />
             <div className="min-h-screen w-full" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
 
                 {/* Content goes here */}
@@ -50,7 +49,6 @@ const FarmerRegister = () => {
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <label className="block mb-2 text-sm font-medium text-white dark:text-white" htmlFor="file_input">Upload file</label>
                             <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-
                         </div>
 
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
@@ -60,13 +58,11 @@ const FarmerRegister = () => {
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <h1 className='w-full text-white text-sm text-center justify-center y-2'>We will send your user name and password via your  mobile number</h1>
                         </div>
-
-
                     </form>
 
 
                     <div className='flex flex-row mx-auto text-white playfair-font mt-10 pb-20'>
-                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { router.push('/pages/MainPage') }}>Back</button>
+                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { router.back() }}>Back</button>
                         <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { console.log("hello") }}>Register</button>
                     </div>
                 </div>
