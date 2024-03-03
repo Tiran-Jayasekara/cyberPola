@@ -30,7 +30,6 @@ const FarmerLogin = () => {
                 position: toast.POSITION.TOP_RIGHT,
             });
         }
-
     }
 
     return (
