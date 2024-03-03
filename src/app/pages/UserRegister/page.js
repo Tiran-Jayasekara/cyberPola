@@ -1,10 +1,31 @@
 'use client'
-
+import UserService from '@/service/userService'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const UserRegister = () => {
     const router = useRouter();
+    const { userRegister } = UserService();
+    const [registerForm, setRegisterForm] = useState();
+
+    const register = async () => {
+        const userData = await userRegister(registerForm)
+        if (userData.data.message === "User Add Successfull") {
+            setRegisterForm("");
+            toast.success(userData.data.message, {
+                icon: '✅',
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            
+        } else {
+            toast.error(userData.data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+                icon: '❗',
+            });
+        }
+    }
+
     return (
         <>
             <div className="h-fit w-full" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
@@ -22,6 +43,12 @@ const UserRegister = () => {
                     <form className="mx-auto md:max-w-md w-full">
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <input
+                                onChange={(event) => {
+                                    setRegisterForm({
+                                        ...registerForm,
+                                        firstName: event.target.value
+                                    })
+                                }}
                                 type='text'
                                 className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                 placeholder=" " /><label
@@ -30,6 +57,12 @@ const UserRegister = () => {
                         </div>
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <input
+                                onChange={(event) => {
+                                    setRegisterForm({
+                                        ...registerForm,
+                                        lastName: event.target.value
+                                    })
+                                }}
                                 type='text'
                                 className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                 placeholder=" " /><label
@@ -38,6 +71,12 @@ const UserRegister = () => {
                         </div>
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <input
+                                onChange={(event) => {
+                                    setRegisterForm({
+                                        ...registerForm,
+                                        mobile: event.target.value
+                                    })
+                                }}
                                 type='text'
                                 className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                 placeholder=" " /><label
@@ -46,6 +85,12 @@ const UserRegister = () => {
                         </div>
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <input
+                                onChange={(event) => {
+                                    setRegisterForm({
+                                        ...registerForm,
+                                        email: event.target.value
+                                    })
+                                }}
                                 type='text'
                                 className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                 placeholder=" " /><label
@@ -55,6 +100,15 @@ const UserRegister = () => {
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            address: {
+                                                ...registerForm.address,
+                                                line1: event.target.value
+                                            }
+                                        });
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -63,6 +117,15 @@ const UserRegister = () => {
                             </div>
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            address: {
+                                                ...registerForm.address,
+                                                line2: event.target.value
+                                            }
+                                        });
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -72,6 +135,12 @@ const UserRegister = () => {
                         </div>
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                             <input
+                                onChange={(event) => {
+                                    setRegisterForm({
+                                        ...registerForm,
+                                        town: event.target.value
+                                    })
+                                }}
                                 type='text'
                                 className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                 placeholder=" " /><label
@@ -81,6 +150,12 @@ const UserRegister = () => {
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            province: event.target.value
+                                        })
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -89,6 +164,12 @@ const UserRegister = () => {
                             </div>
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            zipCode: event.target.value
+                                        })
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -100,6 +181,12 @@ const UserRegister = () => {
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            password: event.target.value
+                                        })
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -108,6 +195,12 @@ const UserRegister = () => {
                             </div>
                             <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
                                 <input
+                                    onChange={(event) => {
+                                        setRegisterForm({
+                                            ...registerForm,
+                                            rePassword: event.target.value
+                                        })
+                                    }}
                                     type='text'
                                     className="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-white disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-white placeholder-shown:border-t-blue-white border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-white focus:border-white"
                                     placeholder=" " /><label
@@ -120,7 +213,7 @@ const UserRegister = () => {
 
                     <div className='flex flex-row mx-auto text-white playfair-font mt-10 pb-20'>
                         <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { router.back() }}>Back</button>
-                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { console.log("hello") }}>Register</button>
+                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { register() }}>Register</button>
                     </div>
                 </div>
 

@@ -43,6 +43,26 @@ const ItemService = () => {
         }
     }
 
+    const getItemsBySearch = async (search) => {
+        try {
+            const getItems = await http.get("/item/getItemBySearch/" + search);
+            return getItems;
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+    const pagination = async (pageNumber) => {
+        try {
+            const getItems = await http.get("/item/getSelectetItems/" + pageNumber);
+            return getItems;
+
+        } catch (error) {
+            throw error
+        }
+    }
+
     const UpdateItem = async (itemDataForm) => {
         try {
             const updateItemData = await http.put("/item/updateItem", itemDataForm);
@@ -57,7 +77,9 @@ const ItemService = () => {
         addNewItem,
         deleteItem,
         getItemsByFarmerId,
-        UpdateItem
+        UpdateItem,
+        pagination,
+        getItemsBySearch
     }
 }
 

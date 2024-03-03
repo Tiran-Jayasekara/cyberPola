@@ -53,9 +53,9 @@ const NavBar = () => {
                 className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
             >
 
-                <a href="#" className="flex items-center">
-                    Blocks
-                </a>
+                <button className="flex items-center cursor-pointer" onClick={() => { router.push('/pages/ShoppingCenter'), setOpenNav(false) }}>
+                    Shopping Center
+                </button>
             </Typography>
             <Typography
                 as="li"

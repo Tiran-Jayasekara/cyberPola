@@ -6,7 +6,7 @@ import { MdOutlineEmail } from "react-icons/md";
 const Footer = () => {
     return (
         <>
-            <div className='flex flex-row w-full mt-20 bg-gray-200 pb-10'>
+            <div className='flex flex-row w-full mt-10 bg-gray-200 pb-10'>
 
                 {/* First Row */}
                 <div className='w-1/3 flex flex-col mx-4 text-center text-gray-800'>

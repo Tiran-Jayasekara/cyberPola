@@ -1,10 +1,18 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 
 const FarmerRegister = () => {
     const router = useRouter();
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        // Access the selected file from the event
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    };
+
     return (
         <>
             <div className="min-h-screen w-full" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
@@ -47,8 +55,15 @@ const FarmerRegister = () => {
                         </div>
 
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
-                            <label className="block mb-2 text-sm font-medium text-white dark:text-white" htmlFor="file_input">Upload file</label>
-                            <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                            <label className="block mb-2 text-sm font-medium text-white dark:text-white" htmlFor="file_input">
+                                Upload file
+                            </label>
+                            <input
+                                onChange={handleFileChange}
+                                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                id="file_input"
+                                type="file"
+                            />
                         </div>
 
                         <div className="relative z-0 md:w-full mb-5 group mx-10 md:mx-0">
