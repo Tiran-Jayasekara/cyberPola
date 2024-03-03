@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
+import Toast from "./components/ToastMessage";
+import GlobalState from "./context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +17,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className={inter.className}>
-        <NavBar/>
-        <main className="">
-          {children}
-        </main>
+        <GlobalState>
+          <NavBar />
+          <main className="">
+            {children}
+          </main>
+        </GlobalState>
+        <Toast />
       </body>
     </html>
   );

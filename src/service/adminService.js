@@ -35,9 +35,19 @@ const AdminService = () => {
         }
     }
 
+    const FarmerLogin = async (loginForm) => {
+        try {
+            const farmerLogin = await http.post("farmer/FarmerLogin", loginForm);
+            return farmerLogin;
+        } catch (error) {
+            throw error
+        }
+    }
+
     return {
         getAllFarmers,
-        getFarmerWithItems
+        getFarmerWithItems,
+        FarmerLogin
     }
 }
 
