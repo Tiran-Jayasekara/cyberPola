@@ -7,6 +7,7 @@ import { addItemControls } from '@/app/components/utils';
 import ItemService from '@/service/itemService';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '@/app/context';
+import CartService from '@/service/cartService';
 
 const Shop = () => {
   const { getFarmerWithItems } = AdminService();
@@ -21,6 +22,7 @@ const Shop = () => {
   const [selectedItem, setselectedItem] = useState();
   const [deleteItemModal, setDeleteItemModal] = useState(false);
   const { shopName } = useContext(GlobalContext);
+  const { addItemToCart } = CartService();
 
   const temporyData = {
     itemName: "TiranJ",
@@ -36,7 +38,7 @@ const Shop = () => {
     description: "TiranJ"
   }
   const [addItem, setAddItem] = useState(temporyData);
-  const { farmer } = useContext(GlobalContext);
+  const { farmer, userData } = useContext(GlobalContext);
 
   useEffect(() => {
     getFarmerDetails();
@@ -69,7 +71,6 @@ const Shop = () => {
     setShowItemDataImg(data.img.img1)
     setShowItemData(true);
   }
-
 
   // Add Items
   const AddItem = async () => {
@@ -140,6 +141,27 @@ const Shop = () => {
         icon: '❗',
         position: toast.POSITION.TOP_RIGHT,
       });
+    }
+  }
+
+  // Add Item To Cart
+  const addToCart = async () => {
+    const cartForm = {
+      itemId: selectedItem._id,
+      userId: userData._id,
+      quantity: 1
+    }
+    const cart = await addItemToCart(cartForm);
+    if (cart.data.message === "Item Added to Cart Successfull") {
+      toast.success(cart.data.message, {
+        icon: '✅',
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error(cart.data.message, {
+        position: toast.POSITION.TOP_RIGHT,
+        icon: '❗',
+    });
     }
   }
 
@@ -218,15 +240,15 @@ const Shop = () => {
         </div>
       </div> : ""}
 
-      
-        <iframe
-          className='mt-10 w-full h-60 md:h-80'
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15829.613632544164!2d80.88285024818944!3d7.308495200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae49fe812dc4207%3A0xefb1cf53b3bb8049!2sGangoda%20Samithi%20Salawa!5e0!3m2!1sen!2slk!4v1709471355506!5m2!1sen!2slk"
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      
+
+      <iframe
+        className='mt-10 w-full h-60 md:h-80'
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15829.613632544164!2d80.88285024818944!3d7.308495200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae49fe812dc4207%3A0xefb1cf53b3bb8049!2sGangoda%20Samithi%20Salawa!5e0!3m2!1sen!2slk!4v1709471355506!5m2!1sen!2slk"
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+
       <Footer />
 
 
@@ -578,7 +600,7 @@ const Shop = () => {
                 </>}
 
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6">
+                <div className="p-6 flex items-center justify-between mr-0 border-t-2">
 
                   {farmer === farmerId ?
                     <>
@@ -605,8 +627,26 @@ const Shop = () => {
 
                     </>
                     : ""}
+
+                  {userData ? <button
+                    className="ml-4 font-bold  text-sm px-0 py-3 rounded  hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+
+                    }
+                    }
+                  >
+                    <div onClick={addToCart} className="flex flex-row ">
+                      <img src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
+                      <h2 className="text-xs uppercase text-gray-400 items-center justify-center text-center mx-auto my-auto ml-2 p-2">Add Cart</h2>
+                    </div>
+                  </button> :
+                    <button className="" type="button">
+                    </button>}
+
+
                   <button
-                    className="bg-emerald-500  text-green-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-emerald-500 text-green-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
                       setShowItemData(false)
@@ -615,9 +655,35 @@ const Shop = () => {
                   >
                     Close
                   </button>
-
-
                 </div>
+
+                {/* <div className="flex items-center justify-between p-0 mr-0 border-t-2">
+
+                                        <button
+                                            className="ml-4 font-bold  text-sm px-0 py-3 rounded  hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => {
+                                                router.push(`/pages/shops/${showItemData.farmerId}`)
+                                            }
+                                            }
+                                        >
+                                            <div className="flex flex-row">
+                                                <img src="/assests/store.png" className="w-10 items-center justify-center mx-auto" alt="" />
+                                                <h2 className="text-sm uppercase text-gray-400 items-center justify-center text-center mx-auto my-auto ml-2">Visit Shop</h2>
+                                            </div>
+                                        </button>
+                                        <button
+                                            className="bg-emerald-500  text-green-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => {
+                                                setShowItemData(false)
+                                            }
+                                            }
+                                        >
+                                            Close
+                                        </button>
+                                    </div> */}
+
               </div>
             </div>
           </div>

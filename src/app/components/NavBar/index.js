@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     Navbar,
     Collapse,
@@ -8,11 +8,13 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { useRouter } from 'next/navigation';
+import { GlobalContext } from '@/app/context';
 
 const NavBar = () => {
 
     const [openNav, setOpenNav] = useState(false);
     const router = useRouter();
+    const { userData } = useContext(GlobalContext);
 
     React.useEffect(() => {
         window.addEventListener(
@@ -57,16 +59,30 @@ const NavBar = () => {
                     Shopping Center
                 </button>
             </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
-            >
-                <a href="#" className="flex items-center">
-                    Docs
-                </a>
-            </Typography>
+            {userData ?
+                <>
+                    <Typography
+                        as="li"
+                        variant="small"
+                        color="blue-gray"
+                        className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
+                    >
+                        <button className="flex items-center cursor-pointer" onClick={() => { router.push('/pages/UserProfile'), setOpenNav(false) }}>
+                            Account
+                        </button>
+                    </Typography>
+                    <Typography
+                        as="li"
+                        variant="small"
+                        color="blue-gray"
+                        className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
+                    >
+                        <div onClick={() => { router.push('/pages/Cart')}} className="flex flex-row ">
+                            <img src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
+                        </div>
+                    </Typography>
+                </> : ""}
+
         </ul>
     );
 

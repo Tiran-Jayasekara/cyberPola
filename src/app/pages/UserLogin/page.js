@@ -1,22 +1,28 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import UserService from '@/service/userService'
 import { toast } from 'react-toastify'
+import { GlobalContext } from '@/app/context'
+
 
 const UserLogin = () => {
     const router = useRouter();
     const { userLogin } = UserService();
     const [loginForm, setLoginForm] = useState();
+    const { userData, setUserData } = useContext(GlobalContext);
 
     const Login = async () => {
         const LoginUser = await userLogin(loginForm)
         if (LoginUser.data.message === "Login Success") {
+            console.log(LoginUser.data.checkUser);
+            setUserData(LoginUser.data.checkUser);
             toast.success(LoginUser.data.message, {
                 icon: '✅',
                 position: toast.POSITION.TOP_RIGHT,
             });
+            router.push('/pages/UserProfile')
         } else {
             toast.error(LoginUser.data.message, {
                 position: toast.POSITION.TOP_RIGHT,

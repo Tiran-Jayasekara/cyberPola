@@ -1,10 +1,12 @@
 'use client'
 
+import { GlobalContext } from '@/app/context';
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useContext } from 'react'
 
 const MainPage = () => {
     const router = useRouter();
+    const { userData, farmer } = useContext(GlobalContext);
     return (
         <>
             <div className="min-h-screen w-full" style={{ backgroundImage: "url('/assests/back.png')", backgroundSize: 'cover' }}>
@@ -17,14 +19,20 @@ const MainPage = () => {
                     </div>
                     <h1 className=' text-white playfair-font text-center md:text-6xl text-4xl font-bold mx-10 mt-20'>Fresh Foods for All</h1>
                     <p className=' text-gray-300 playfair-font text-center md:text-4xl text-xl mt-10 font-bold mx-10'>Always  Fresh Vegetables and Fruits from the farm lands</p>
-                    <div className='flex flex-row mx-auto mt-20 text-white playfair-font'>
-                        <button className='bg-green-600 p-2 rounded-xl px-6 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/UserLogin') }}>Login</button>
-                        <button className='bg-green-600 p-2 rounded-xl px-6 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/UserRegister') }}>Sign Up</button>
-                    </div>
-                    <div className='flex flex-row mx-auto mt-10 text-white playfair-font mb-20'>
-                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/FarmerLogin') }}>Login as Seller</button>
-                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/FarmerRegister') }}>Sign-up as Seller</button>
-                    </div>
+
+                    {userData || farmer ? <button className='bg-green-600 playfair-font mt-20 text-white p-2 rounded-xl w-60 items-center mx-auto px-6 hover:bg-green-900' onClick={() => {
+                        window.location.reload();
+                    }}>LogOut</button> : <>
+                        <div className='flex flex-row mx-auto mt-20 text-white playfair-font'>
+                            <button className='bg-green-600 p-2 rounded-xl px-6 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/UserLogin') }}>Login</button>
+                            <button className='bg-green-600 p-2 rounded-xl px-6 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/UserRegister') }}>Sign Up</button>
+                        </div>
+                        <div className='flex flex-row mx-auto mt-10 text-white playfair-font mb-20'>
+                            <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/FarmerLogin') }}>Login as Seller</button>
+                            <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/FarmerRegister') }}>Sign-up as Seller</button>
+                        </div>
+                    </>
+                    }
                 </div>
             </div>
         </>
