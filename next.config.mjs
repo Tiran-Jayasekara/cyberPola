@@ -14,8 +14,8 @@ const withPWA = withPWAInit({
     workboxOptions: {
         disableDevLogs: true,
     },
-    images: {
-        domains: ['scontent.fcmb6-1.fna.fbcdn.net'],
+    output: {
+        dir: 'out',
       },
 
 });
