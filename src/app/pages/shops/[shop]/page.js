@@ -7,6 +7,7 @@ import { addItemControls } from '@/app/components/utils';
 import ItemService from '@/service/itemService';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '@/app/context';
+import CartService from '@/service/cartService';
 
 const Shop = () => {
   const { getFarmerWithItems } = AdminService();
@@ -21,6 +22,7 @@ const Shop = () => {
   const [selectedItem, setselectedItem] = useState();
   const [deleteItemModal, setDeleteItemModal] = useState(false);
   const { shopName } = useContext(GlobalContext);
+  const { addItemToCart } = CartService();
 
   const temporyData = {
     itemName: "TiranJ",
@@ -36,7 +38,7 @@ const Shop = () => {
     description: "TiranJ"
   }
   const [addItem, setAddItem] = useState(temporyData);
-  const {farmer} = useContext(GlobalContext);
+  const { farmer, userData } = useContext(GlobalContext);
 
   useEffect(() => {
     getFarmerDetails();
@@ -52,6 +54,7 @@ const Shop = () => {
     }
   }
 
+  // GetItemsByFarmerId
   const GetItemsByFarmerId = async () => {
     const Items = await getItemsByFarmerId(farmerId);
     if (Items) {
@@ -62,11 +65,12 @@ const Shop = () => {
     }
   }
 
+  const [ShowItemDataImg, setShowItemDataImg] = useState();
   const SelectOneItem = (data) => {
     setselectedItem(data);
+    setShowItemDataImg(data.img.img1)
     setShowItemData(true);
   }
-
 
   // Add Items
   const AddItem = async () => {
@@ -140,6 +144,34 @@ const Shop = () => {
     }
   }
 
+  // Add Item To Cart
+  const addToCart = async () => {
+    const cartForm = {
+      itemId: selectedItem._id,
+      userId: userData._id,
+      quantity: 1
+    }
+    const cart = await addItemToCart(cartForm);
+    if (cart.data.message === "Item Added to Cart Successfull") {
+      toast.success(cart.data.message, {
+        icon: '✅',
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error(cart.data.message, {
+        position: toast.POSITION.TOP_RIGHT,
+        icon: '❗',
+    });
+    }
+  }
+
+
+  const [showLargeMap, setShowLargeMap] = useState(false);
+
+  const handleGetLocationClick = () => {
+    setShowLargeMap(true);
+  };
+
 
 
   return (
@@ -153,7 +185,18 @@ const Shop = () => {
       <div className='w-full flex flex-wrap mt-4'>
         {items ? items.map((data, index) => (
           <div key={index} onClick={() => { SelectOneItem(data) }} className="m-4 w-40 md:w-80 mx-auto bg-white border hover:scale-105 transform transition-transform duration-300 ease-in-out border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div>
+
+            <div className='relative'>
+              {data.availability ?
+                <>
+
+                </>
+                :
+                <div className='absolute top-0 right-0'>
+                  <img className='w-14' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                  {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
+                </div>
+              }
               <img className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
             </div>
             <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
@@ -187,9 +230,24 @@ const Shop = () => {
           <h5 className=" playfair-font  tracking-tight text-gray-900 dark:text-white  ">Name : {farmerData.firstName} {farmerData.lastName}</h5>
           <h5 className=" playfair-font  tracking-tight text-gray-900 dark:text-white mt-2">Address : {farmerData.address}</h5>
           <h5 className=" playfair-font  tracking-tight text-gray-900 dark:text-white mt-2">Number : {farmerData.mobile}</h5>
-          <button className='bg-green-600 p-2 mt-4 rounded-2xl text-white'>Get Location</button>
+          <button
+            className='bg-green-600 p-2 mt-4 rounded-2xl text-white'
+            onClick={handleGetLocationClick}
+          >
+            Get Location
+          </button>
+
         </div>
       </div> : ""}
+
+
+      <iframe
+        className='mt-10 w-full h-60 md:h-80'
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15829.613632544164!2d80.88285024818944!3d7.308495200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae49fe812dc4207%3A0xefb1cf53b3bb8049!2sGangoda%20Samithi%20Salawa!5e0!3m2!1sen!2slk!4v1709471355506!5m2!1sen!2slk"
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
 
       <Footer />
 
@@ -364,7 +422,7 @@ const Shop = () => {
                                           setselectedItem({
                                             ...selectedItem,
                                             [controlItem.id]: event.target.value,
-                                            
+
 
                                           })
                                         }}
@@ -435,8 +493,8 @@ const Shop = () => {
                     </div>
                   </div>
                 </section> : <>
-                  <div className="flex items-center justify-between p-4 w-full ">
-                    <h3 className="w-full md:text-2xl text-xl  font-semibold justify-center items-center md:ml-10">
+                  <div className="flex flex-col items-center justify-between p-4 w-full ">
+                    <h3 className="w-full md:text-2xl text-xl text-center mt-4 font-semibold justify-center items-center md:ml-0">
                       {selectedItem.itemName}
                     </h3>
 
@@ -454,7 +512,33 @@ const Shop = () => {
 
                         </div>
                       }
-                      <img src={selectedItem.img} alt="card-image" className="md:w-96 mt-4 md:h-auto md:rounded-2xl justify-center items-center " />
+
+                      <div className="grid gap-4">
+                        <div>
+                          <img className="flex h-96 items-center mx-auto rounded-lg " src={ShowItemDataImg} alt="" />
+                        </div>
+                        <div className="grid grid-cols-3 justify-center mx-auto gap-2 w-full">
+                          <div>
+                            <img
+                              onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
+                              src={selectedItem.img.img1}
+                              className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
+                          </div>
+                          <div>
+                            <img
+                              onClick={() => { setShowItemDataImg(selectedItem.img.img2) }}
+                              src={selectedItem.img.img2}
+                              className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
+                          </div>
+                          <div>
+                            <img
+                              onClick={() => { setShowItemDataImg(selectedItem.img.img3) }}
+                              src={selectedItem.img.img3}
+                              className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
@@ -471,25 +555,52 @@ const Shop = () => {
                         {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                       </div>
                     }
-                    <img src={selectedItem.img} alt="card-image" className="md:w-96 w-80 h-auto rounded-xl mt-4 md:h-auto ml-6 mr-6 md:rounded-2xl justify-center items-center " />
+                    <div className="grid gap-4">
+                      <div>
+                        <img className="flex h-48 items-center mx-auto rounded-lg object-center "
+                          src={ShowItemDataImg}
+                          alt="" />
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 w-full">
+                        <div>
+                          <img
+                            onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
+                            src={selectedItem.img.img1}
+                            className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
+                        </div>
+                        <div>
+                          <img
+                            onClick={() => { setShowItemDataImg(selectedItem.img.img2) }}
+                            src={selectedItem.img.img2}
+                            className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
+                        </div>
+                        <div>
+                          <img
+                            onClick={() => { setShowItemDataImg(selectedItem.img.img3) }}
+                            src={selectedItem.img.img3}
+                            className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
+                        </div>
+
+                      </div>
+                    </div>
                   </div>
 
                   {/*body*/}
-                  <div className="relative p-6 flex-auto">
+                  <div className="relative p-6 flex-auto mt-10">
                     <div className='text-gray-800 font-bold md:ml-10 flex'>
-                      <p className='text-black md:text-xl'>Brand :</p>
-                      <p className='ml-4'>{selectedItem.brand}</p>
+                      <p className='text-black md:text-xl'>Price :</p>
+                      <p className='ml-4 text-red-900'>{selectedItem.price}</p>
                     </div>
 
-                    <div className='text-gray-800 font-bold md:ml-10 flex mt-6'>
+                    <div className='text-gray-800 font-bold md:ml-10 mt-2'>
                       <p className='text-black md:text-xl'>Description :</p>
-                      <p className='text-gray-800 md:text-xl ml-4'>{selectedItem.description}</p>
+                      <p className='text-gray-800 md:text-xl text-sm ml-4 mr-4 break-words'>{selectedItem.description}</p>
                     </div>
                   </div>
                 </>}
 
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6">
+                <div className="p-6 flex items-center justify-between mr-0 border-t-2">
 
                   {farmer === farmerId ?
                     <>
@@ -515,25 +626,64 @@ const Shop = () => {
                       </button>
 
                     </>
-                    : <button
-                      className="bg-emerald-500 bg-green-800 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => {
-                        setShowItemData(false)
-                      }
-                      }
-                    >
-                      OK
-                    </button>}
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    : ""}
+
+                  {userData ? <button
+                    className="ml-4 font-bold  text-sm px-0 py-3 rounded  hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setShowItemData(false)}
+                    onClick={() => {
+
+                    }
+                    }
+                  >
+                    <div onClick={addToCart} className="flex flex-row ">
+                      <img src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
+                      <h2 className="text-xs uppercase text-gray-400 items-center justify-center text-center mx-auto my-auto ml-2 p-2">Add Cart</h2>
+                    </div>
+                  </button> :
+                    <button className="" type="button">
+                    </button>}
+
+
+                  <button
+                    className="bg-emerald-500 text-green-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                      setShowItemData(false)
+                    }
+                    }
                   >
                     Close
                   </button>
-
                 </div>
+
+                {/* <div className="flex items-center justify-between p-0 mr-0 border-t-2">
+
+                                        <button
+                                            className="ml-4 font-bold  text-sm px-0 py-3 rounded  hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => {
+                                                router.push(`/pages/shops/${showItemData.farmerId}`)
+                                            }
+                                            }
+                                        >
+                                            <div className="flex flex-row">
+                                                <img src="/assests/store.png" className="w-10 items-center justify-center mx-auto" alt="" />
+                                                <h2 className="text-sm uppercase text-gray-400 items-center justify-center text-center mx-auto my-auto ml-2">Visit Shop</h2>
+                                            </div>
+                                        </button>
+                                        <button
+                                            className="bg-emerald-500  text-green-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => {
+                                                setShowItemData(false)
+                                            }
+                                            }
+                                        >
+                                            Close
+                                        </button>
+                                    </div> */}
+
               </div>
             </div>
           </div>

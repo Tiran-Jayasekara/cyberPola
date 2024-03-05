@@ -1,10 +1,10 @@
-import React from 'react'
+'use client'
 import axios from "axios";
 
 const AdminService = () => {
 
     const http = axios.create({
-        baseURL: "http://192.168.1.185:3001",
+        baseURL: "https://cyberpola-backend.onrender.com",
         // process.env.REACT_APP_BASE_URL,
 
         headers: {
@@ -44,10 +44,24 @@ const AdminService = () => {
         }
     }
 
+    const uplodePdf = async (file) => {
+        try {
+            console.log(file); // Log the file object
+            // Create a FormData object and append the PDF file
+
+            // const uplodePdf = await http.post("farmerPdfUplode/farmerUploadFile", form_data);
+            // return uplodePdf;
+        } catch (error) {
+            throw error
+        }
+    }
+
+
     return {
         getAllFarmers,
         getFarmerWithItems,
-        FarmerLogin
+        FarmerLogin,
+        uplodePdf
     }
 }
 

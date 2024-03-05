@@ -18,7 +18,7 @@ const Shops = () => {
         const farmersData = await getAllFarmers();
         if (farmersData) {
             setFarmersData(farmersData.data.allFarmersDetails)
-            console.log(farmersData.data.allFarmersDetails);
+           
         } else {
             console.log("No data");
         }
