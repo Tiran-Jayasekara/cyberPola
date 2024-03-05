@@ -4,7 +4,7 @@ import React from 'react'
 
 const CartService = () => {
     const http = axios.create({
-        baseURL: "http://192.168.1.185:3001",
+        baseURL: "https://cyberpola-backend.onrender.com",
         // process.env.REACT_APP_BASE_URL,
 
         headers: {
@@ -29,10 +29,20 @@ const CartService = () => {
             const items = await http.get("cart/getAllCartItemsByUser/" + userId);
             if (items) {
                 return items;
-            } else {
-
             }
 
+        } catch (error) {
+            throw error
+        }
+    }
+
+    const removerItemFromCart = async (itemId) => {
+        console.log(itemId);
+        try {
+            const itemData = await http.delete("cart/DeleteItemFromCart/" + itemId);
+            if (itemData) {
+                return itemData;
+            }
 
         } catch (error) {
             throw error
@@ -41,7 +51,8 @@ const CartService = () => {
 
     return {
         addItemToCart,
-        getAllItemsByUser
+        getAllItemsByUser,
+        removerItemFromCart
     }
 }
 

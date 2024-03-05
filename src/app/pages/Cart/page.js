@@ -5,17 +5,18 @@ import { GlobalContext } from '@/app/context';
 import { toast } from 'react-toastify';
 
 const Cart = () => {
-    const { getAllItemsByUser } = CartService();
+    const { getAllItemsByUser, removerItemFromCart } = CartService();
     const { userData } = useContext(GlobalContext);
     const [items, setItems] = useState();
     const [showItemData, setShowItemData] = useState();
-    const [showItemDataModel, setShowItemDataModel] = useState();
+    const [showItemDataModel, setShowItemDataModel] = useState(false);
     const [showItemDataImg, setShowItemDataImg] = useState();
 
     useEffect(() => {
         CartItems();
     }, [])
 
+    // Get All Cart Items by User
     const CartItems = async () => {
         if (userData) {
             console.log(userData);
@@ -37,9 +38,29 @@ const Cart = () => {
         });
     }
 
+    //Remove Item From Cart
+    const removeCartItem = async () => {
+        const itemId = showItemData._id;
+        const removeData = await removerItemFromCart(itemId);
+        if (removeData) {
+            toast.success(removeData.data.message, {
+                icon: '✅',
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            CartItems();
+            setShowItemDataModel(false)
+        } else {
+            toast.error(removeData.data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+                icon: '❗',
+            });
+        }
+
+    }
+
     return (
         <>
-        <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-10 md:mt-10">Cart</h5>
+            <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-10 md:mt-10">Cart</h5>
             {userData ?
                 <div className='w-full flex flex-wrap mt-4'>
                     {items ? items.map((data, index) => (
@@ -67,7 +88,7 @@ const Cart = () => {
                         </div>
 
                     )) : <>
-                        <div className='flex w-full'><h2 className='text-center justify-center items-center mx-auto mt-10'>Loading....</h2></div>
+                        <div className='flex w-full'><h2 className='text-center justify-center items-center mx-auto mt-10'>No Any Items....</h2></div>
                     </>}
                 </div>
 
@@ -202,6 +223,14 @@ const Cart = () => {
                                             onClick={() => { setShowItemDataModel(false) }}
 
                                         >Close
+
+                                        </button>
+                                        <button
+                                            className="bg-emerald-500 m-4 text-red-600 active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={removeCartItem}
+
+                                        >Remove
 
                                         </button>
                                         <button
