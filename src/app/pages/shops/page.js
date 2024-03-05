@@ -12,7 +12,7 @@ const Shops = () => {
 
     useEffect(() => {
         getAllFarmersDetails();
-    }, [])
+    })
 
     const getAllFarmersDetails = async () => {
         const farmersData = await getAllFarmers();

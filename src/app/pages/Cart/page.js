@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import CartService from '@/service/cartService'
 import { GlobalContext } from '@/app/context';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 const Cart = () => {
     const { getAllItemsByUser, removerItemFromCart } = CartService();
@@ -14,7 +15,7 @@ const Cart = () => {
 
     useEffect(() => {
         CartItems();
-    }, [])
+    })
 
     // Get All Cart Items by User
     const CartItems = async () => {
@@ -73,7 +74,7 @@ const Cart = () => {
                                     </>
                                     :
                                     <div className='absolute top-0 right-0'>
-                                        <img className='w-14' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                                        <Image className='w-14' src='/assests/soldout.png' alt='sold Out' width="100" height="100" />
                                         {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                                     </div>
                                 }

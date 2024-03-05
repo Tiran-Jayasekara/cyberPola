@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useRouter } from 'next/navigation';
 import { GlobalContext } from '@/app/context';
+import Image from 'next/image';
 
 const NavBar = () => {
 
@@ -78,7 +79,7 @@ const NavBar = () => {
                         className="flex items-center gap-x-2 p-1 font-medium text-white playfair-font hover:text-yellow-600"
                     >
                         <div onClick={() => { router.push('/pages/Cart')}} className="flex flex-row ">
-                            <img src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
+                            <Image src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" width="100" height="100"/>
                         </div>
                     </Typography>
                 </> : ""}
