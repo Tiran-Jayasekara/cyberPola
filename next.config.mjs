@@ -3,7 +3,6 @@ const nextConfig = {};
 
 import withPWAInit from "@ducanh2912/next-pwa";
 
-
 const withPWA = withPWAInit({
     dest: "public",
     cacheOnFrontEndNav: true,
@@ -14,10 +13,11 @@ const withPWA = withPWAInit({
     workboxOptions: {
         disableDevLogs: true,
     },
-    output: {
-        dir: 'out',
-      },
-
 });
+
+// Move the output configuration outside of withPWAInit options
+nextConfig.output = {
+    dir: 'out',
+};
 
 export default withPWA(nextConfig);
