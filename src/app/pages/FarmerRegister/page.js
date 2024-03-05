@@ -1,17 +1,33 @@
 'use client'
-
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import AdminService from '@/service/adminService'
 
 const FarmerRegister = () => {
     const router = useRouter();
     const [selectedFile, setSelectedFile] = useState(null);
+    const { uplodePdf } = AdminService();
 
     const handleFileChange = (event) => {
         // Access the selected file from the event
         const file = event.target.files[0];
-        setSelectedFile(file);
+        const form_data = new FormData();
+        form_data.set('farmer', file);
+        setSelectedFile(form_data);
     };
+
+    const Register = async () => {
+        try {
+            if (!selectedFile) {
+                throw new Error('Please select a file');
+            }
+            // const uplodeDetails = await uplodePdf(selectedFile);
+            // console.log(uplodeDetails);
+        } catch (error) {
+            console.error('Error during registration:', error.message);
+            // Handle error (e.g., display error message to the user)
+        }
+    }
 
     return (
         <>
@@ -78,7 +94,7 @@ const FarmerRegister = () => {
 
                     <div className='flex flex-row mx-auto text-white playfair-font mt-10 pb-20'>
                         <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { router.back() }}>Back</button>
-                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={() => { console.log("hello") }}>Register</button>
+                        <button className='bg-green-600 p-2 rounded-xl md:px-6 px-4 mx-8 hover:bg-green-900' onClick={Register}>Register</button>
                     </div>
                 </div>
 
