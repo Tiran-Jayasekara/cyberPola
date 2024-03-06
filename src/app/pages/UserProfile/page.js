@@ -15,6 +15,7 @@ const UserProfile = () => {
         setProfileData(userData)
     })
 
+    console.log(profileData);
     return (
         <>
             <div className='flex flex-col'>
