@@ -12,7 +12,7 @@ const UserProfile = () => {
     return (
         <>
             <div className='flex flex-col'>
-                <Image width={100} height={100} src='/assests/01.jpg' alt='Cover' />
+                <Image width={2000} height={100} src='/assests/01.jpg' alt='Cover' />
 
                 <h1 className='text-green-900 playfair-font text-center md:text-4xl text-2xl font-bold mx-10 md:mt-20 mt-10 mb-10'>User profile</h1>
 

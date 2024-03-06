@@ -15,7 +15,7 @@ const ItemList = ({ setShowItemData, setShowItemDataModel , setShowItemDataImg }
         fetchItems(pageNumber);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    });
+    },[]);
 
 
     const fetchItems = async (page) => { // Accept pageNumber as a parameter
