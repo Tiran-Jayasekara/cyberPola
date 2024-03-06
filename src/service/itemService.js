@@ -53,6 +53,16 @@ const ItemService = () => {
         }
     }
 
+    const getAllItems = async () => {
+        try {
+            const getItems = await http.get("/item/AllItems");
+            return getItems;
+
+        } catch (error) {
+            throw error
+        }
+    }
+
     const pagination = async (pageNumber) => {
         try {
             const getItems = await http.get("/item/getSelectetItems/" + pageNumber);
@@ -79,7 +89,8 @@ const ItemService = () => {
         getItemsByFarmerId,
         UpdateItem,
         pagination,
-        getItemsBySearch
+        getItemsBySearch,
+        getAllItems
     }
 }
 
