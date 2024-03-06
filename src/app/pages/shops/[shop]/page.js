@@ -178,7 +178,7 @@ const Shop = () => {
   return (
     <>
       <div className='w-full'>
-        <Image width={100} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
+        <Image width={2000} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
       </div>
 
       <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-0 md:mt-0">Store</h5>
@@ -194,11 +194,11 @@ const Shop = () => {
                 </>
                 :
                 <div className='absolute top-0 right-0'>
-                  <Image width={100} height={100} className='w-14' src='/assests/soldout.png' alt='sold Out' />
+                  <Image width={400} height={100} className='w-14' src='/assests/soldout.png' alt='sold Out' />
                   {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                 </div>
               }
-              <Image width={100} height={100} className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
+              <Image width={600} height={100} className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
             </div>
             <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
               <div>
@@ -216,7 +216,7 @@ const Shop = () => {
       {farmer === farmerId ?
         <>
           <div className='flex justify-end w-full md:mt-40'>
-            <Image width={100} height={100} onClick={() => { setAddItemModal(true) }} className='w-10 md:w-20 cursor-pointer items-end mx-4 mt-10 hover:scale-110 transition-transform duration-300' src='/assests/addIcon.png' alt='addIcon' />
+            <Image width={400} height={100} onClick={() => { setAddItemModal(true) }} className='w-10 md:w-20 cursor-pointer items-end mx-4 mt-10 hover:scale-110 transition-transform duration-300' src='/assests/addIcon.png' alt='addIcon' />
           </div>
         </>
         : ""}
@@ -509,7 +509,7 @@ const Shop = () => {
 
                         <div className='absolute  top-0 right-4'>
                           {/* Sold Out Image Deskto Responce */}
-                          <Image width={100} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
+                          <Image width={400} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
 
                         </div>
                       }
@@ -520,19 +520,19 @@ const Shop = () => {
                         </div>
                         <div className="grid grid-cols-3 justify-center mx-auto gap-2 w-full">
                           <div>
-                            <Image width={100} height={100}
+                            <Image width={400} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
                               src={selectedItem.img.img1}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                           </div>
                           <div>
-                            <Image width={100} height={100}
+                            <Image width={400} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img2) }}
                               src={selectedItem.img.img2}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                           </div>
                           <div>
-                            <Image width={100} height={100}
+                            <Image width={400} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img3) }}
                               src={selectedItem.img.img3}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
@@ -552,7 +552,7 @@ const Shop = () => {
                       :
                       <div className='absolute  top-0 right-4 -mt-10'>
                         {/* Sold Out Image Mobile Responce */}
-                        <Image width={100} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
+                        <Image width={400} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
                         {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                       </div>
                     }
@@ -564,7 +564,7 @@ const Shop = () => {
                       </div>
                       <div className="grid grid-cols-3 gap-2 w-full">
                         <div>
-                          <Image width={100} height={100}
+                          <Image width={400} height={100}
                             onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
                             src={selectedItem.img.img1}
                             className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />

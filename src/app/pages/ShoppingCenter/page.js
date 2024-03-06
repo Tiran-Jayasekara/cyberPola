@@ -15,7 +15,7 @@ const ShoppingCenter = () => {
         <>
 
             <div className='w-full'>
-                <Image width={100} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
+                <Image width={2000} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
             </div>
             <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-0 md:mt-0">Shopping Center</h5>
             <SearchBar />

@@ -16,7 +16,7 @@ const MainPage = () => {
                 <div className='flex flex-col w-full'>
                     <div className="h-auto relative mx-auto justify-center items-center mt-10">
                         <div className="absolute inset-0 bg-black opacity-80 rounded-2xl "></div> {/* Overlay */}
-                        <Image width={100} height={100} className='relative z-10 mx-auto w-60' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
+                        <Image width={1000} height={100} className='relative z-10 mx-auto w-60' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
                     </div>
                     <h1 className=' text-white playfair-font text-center md:text-6xl text-4xl font-bold mx-10 mt-20'>Fresh Foods for All</h1>
                     <p className=' text-gray-300 playfair-font text-center md:text-4xl text-xl mt-10 font-bold mx-10'>Always  Fresh Vegetables and Fruits from the farm lands</p>
