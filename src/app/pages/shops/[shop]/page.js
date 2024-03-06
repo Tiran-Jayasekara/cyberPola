@@ -8,6 +8,7 @@ import ItemService from '@/service/itemService';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '@/app/context';
 import CartService from '@/service/cartService';
+import Image from 'next/image';
 
 const Shop = () => {
   const { getFarmerWithItems } = AdminService();
@@ -42,7 +43,7 @@ const Shop = () => {
 
   useEffect(() => {
     getFarmerDetails();
-  }, [])
+  },)
 
   const getFarmerDetails = async () => {
     const FarmerAndItems = await getFarmerWithItems(farmerId)
@@ -177,7 +178,7 @@ const Shop = () => {
   return (
     <>
       <div className='w-full'>
-        <img className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
+        <Image width={100} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
       </div>
 
       <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-0 md:mt-0">Store</h5>
@@ -193,11 +194,11 @@ const Shop = () => {
                 </>
                 :
                 <div className='absolute top-0 right-0'>
-                  <img className='w-14' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                  <Image width={100} height={100} className='w-14' src='/assests/soldout.png' alt='sold Out' />
                   {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                 </div>
               }
-              <img className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
+              <Image width={100} height={100} className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
             </div>
             <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
               <div>
@@ -215,7 +216,7 @@ const Shop = () => {
       {farmer === farmerId ?
         <>
           <div className='flex justify-end w-full md:mt-40'>
-            <img onClick={() => { setAddItemModal(true) }} className='w-10 md:w-20 cursor-pointer items-end mx-4 mt-10 hover:scale-110 transition-transform duration-300' src='/assests/addIcon.png' alt='addIcon' />
+            <Image width={100} height={100} onClick={() => { setAddItemModal(true) }} className='w-10 md:w-20 cursor-pointer items-end mx-4 mt-10 hover:scale-110 transition-transform duration-300' src='/assests/addIcon.png' alt='addIcon' />
           </div>
         </>
         : ""}
@@ -224,7 +225,7 @@ const Shop = () => {
       {farmerData ? <div className='flex flex-row mt-20 md:mt-40 mx-4'>
         <div className='w-1/2 flex flex-col md:ml-20'>
           <h5 className=" playfair-font  tracking-tight md:text-2xl text-gray-900 text-center dark:text-white">Seller(Farmer) Details</h5>
-          <img className="p-2 rounded-t-lg" src={farmerData.farmerImg} alt="product image" />
+          <Image width={800} height={100} className="p-2 rounded-t-lg" src={farmerData.farmerImg} alt="product image" />
         </div>
         <div className='w-1/2 text-xs md:text-xl text-center mt-4 p-2 justify-center items-center my-auto md:mt-40'>
           <h5 className=" playfair-font  tracking-tight text-gray-900 dark:text-white  ">Name : {farmerData.firstName} {farmerData.lastName}</h5>
@@ -508,30 +509,30 @@ const Shop = () => {
 
                         <div className='absolute  top-0 right-4'>
                           {/* Sold Out Image Deskto Responce */}
-                          <img className='w-20' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                          <Image width={100} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
 
                         </div>
                       }
 
                       <div className="grid gap-4">
                         <div>
-                          <img className="flex h-96 items-center mx-auto rounded-lg " src={ShowItemDataImg} alt="" />
+                          <Image width={400} height={100} className="flex h-96 items-center mx-auto rounded-lg " src={ShowItemDataImg} alt="" />
                         </div>
                         <div className="grid grid-cols-3 justify-center mx-auto gap-2 w-full">
                           <div>
-                            <img
+                            <Image width={100} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
                               src={selectedItem.img.img1}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                           </div>
                           <div>
-                            <img
+                            <Image width={100} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img2) }}
                               src={selectedItem.img.img2}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                           </div>
                           <div>
-                            <img
+                            <Image width={100} height={100}
                               onClick={() => { setShowItemDataImg(selectedItem.img.img3) }}
                               src={selectedItem.img.img3}
                               className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
@@ -551,31 +552,31 @@ const Shop = () => {
                       :
                       <div className='absolute  top-0 right-4 -mt-10'>
                         {/* Sold Out Image Mobile Responce */}
-                        <img className='w-20' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                        <Image width={100} height={100} className='w-20' src='/assests/soldout.png' alt='sold Out' />
                         {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                       </div>
                     }
                     <div className="grid gap-4">
                       <div>
-                        <img className="flex h-48 items-center mx-auto rounded-lg object-center "
+                        <Image width={250} height={100} className="flex h-48 items-center mx-auto rounded-lg object-center "
                           src={ShowItemDataImg}
                           alt="" />
                       </div>
                       <div className="grid grid-cols-3 gap-2 w-full">
                         <div>
-                          <img
+                          <Image width={100} height={100}
                             onClick={() => { setShowItemDataImg(selectedItem.img.img1) }}
                             src={selectedItem.img.img1}
                             className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
                         </div>
                         <div>
-                          <img
+                          <Image width={100} height={100}
                             onClick={() => { setShowItemDataImg(selectedItem.img.img2) }}
                             src={selectedItem.img.img2}
                             className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
                         </div>
                         <div>
-                          <img
+                          <Image width={100} height={100}
                             onClick={() => { setShowItemDataImg(selectedItem.img.img3) }}
                             src={selectedItem.img.img3}
                             className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
@@ -637,7 +638,7 @@ const Shop = () => {
                     }
                   >
                     <div onClick={addToCart} className="flex flex-row ">
-                      <img src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
+                      <Image width={100} height={100} src="/assests/cart.png" className="w-12 items-center justify-center mx-auto" alt="" />
                       <h2 className="text-xs uppercase text-gray-400 items-center justify-center text-center mx-auto my-auto ml-2 p-2">Add Cart</h2>
                     </div>
                   </button> :
@@ -704,7 +705,7 @@ const Shop = () => {
 
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Item?</h3>
                 <button data-modal-hide="popup-modal" type="button" className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2" onClick={() => { DeleteItem() }}>
-                  Yes, I'm sure
+                  Yes I m sure
                 </button>
                 <button data-modal-hide="popup-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" onClick={() => { setDeleteItemModal(false) }}>No, cancel</button>
               </div>

@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import AdminService from '@/service/adminService'
+import Image from 'next/image'
 
 const FarmerRegister = () => {
     const router = useRouter();
@@ -38,7 +39,7 @@ const FarmerRegister = () => {
                 <div className='flex flex-col w-full'>
                     <div className="h-auto relative mx-auto justify-center items-center mt-10">
                         <div className="absolute inset-0 bg-black opacity-80 rounded-2xl "></div> {/* Overlay */}
-                        <img className='relative z-10 mx-auto w-40' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
+                        <Image width={100} height={100} className='relative z-10 mx-auto w-40' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
                     </div>
                     <h1 className=' text-white playfair-font text-center md:text-4xl text-2xl font-bold mx-10 md:mt-20 mt-10 mb-10'>Farmer Register</h1>
 

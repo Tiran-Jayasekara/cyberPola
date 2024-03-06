@@ -1,6 +1,7 @@
 'use client'
 import Footer from '@/app/components/Footer';
 import { GlobalContext } from '@/app/context'
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react'
 
@@ -11,12 +12,12 @@ const UserProfile = () => {
     return (
         <>
             <div className='flex flex-col'>
-                <img src='/assests/01.jpg' alt='Cover' />
+                <Image width={100} height={100} src='/assests/01.jpg' alt='Cover' />
 
                 <h1 className='text-green-900 playfair-font text-center md:text-4xl text-2xl font-bold mx-10 md:mt-20 mt-10 mb-10'>User profile</h1>
 
                 {userData ? <>
-                    <img className='mx-auto rounded-full w-40 h-40' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6oC0cLNyFt4XMtPNe35Tct-8iicsxnDi--fghnv05pczTghd04zc3wR9ATttVVHswLX4&usqp=CAU' alt='' />
+                    <Image width={100} height={100} className='mx-auto rounded-full w-40 h-40' src='/assests/profile.jpeg' alt='' />
                     <p className='playfair-font text-center mt-10'>{userData.firstName} {userData.lastName}</p>
                     <p className='playfair-font text-center mt-4'>{userData.email}</p>
                     <p className='playfair-font text-center mt-4'>{userData.mobile}</p>

@@ -78,7 +78,7 @@ const Cart = () => {
                                         {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                                     </div>
                                 }
-                                <img className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.itemId.img.img1} alt="product image" />
+                                <Image width="100" height="100" className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.itemId.img.img1} alt="product image" />
                             </div>
                             <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
                                 <div>
@@ -124,30 +124,30 @@ const Cart = () => {
 
                                                 <div className='absolute  top-0 right-4'>
                                                     {/* Sold Out Image Deskto Responce */}
-                                                    <img className='w-20' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                                                    <Image width="100" height="100" className='w-20' src='/assests/soldout.png' alt='sold Out' />
 
                                                 </div>
                                             }
 
                                             <div className="grid gap-4">
                                                 <div>
-                                                    <img className="flex h-96 items-center mx-auto rounded-lg " src={showItemDataImg} alt="" />
+                                                    <Image width={400} height={100} className="flex h-96 items-center mx-auto rounded-lg " src={showItemDataImg} alt="" />
                                                 </div>
                                                 <div className="grid grid-cols-3 justify-center mx-auto gap-2 w-full">
                                                     <div>
-                                                        <img
+                                                        <Image width={200} height={100}
                                                             onClick={() => { setShowItemDataImg(showItemData.itemId.img.img1) }}
                                                             src={showItemData.itemId.img.img1}
                                                             className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                                                     </div>
                                                     <div>
-                                                        <img
+                                                        <Image width={200} height={100} 
                                                             onClick={() => { setShowItemDataImg(showItemData.itemId.img.img2) }}
                                                             src={showItemData.itemId.img.img2}
                                                             className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
                                                     </div>
                                                     <div>
-                                                        <img
+                                                        <Image width={200} height={100}
                                                             onClick={() => { setShowItemDataImg(showItemData.itemId.img.img3) }}
                                                             src={showItemData.itemId.img.img3}
                                                             className="w-auto mx-0 h-20 rounded-lg cursor-pointer" alt="gallery-image" />
@@ -167,31 +167,31 @@ const Cart = () => {
                                             :
                                             <div className='absolute  top-0 right-4 -mt-10'>
                                                 {/* Sold Out Image Mobile Responce */}
-                                                <img className='w-20' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                                                <Image width="100" height="100" className='w-20' src='/assests/soldout.png' alt='sold Out' />
                                                 {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                                             </div>
                                         }
                                         <div className="grid gap-4">
                                             <div>
-                                                <img className="flex h-48 items-center mx-auto rounded-lg object-center "
+                                                <Image width={250} height={100} className="flex h-48 items-center mx-auto rounded-lg object-center "
                                                     src={showItemDataImg}
                                                     alt="" />
                                             </div>
                                             <div className="grid grid-cols-3 gap-2 w-full">
                                                 <div>
-                                                    <img
+                                                    <Image width={100} height={100} 
                                                         onClick={() => { setShowItemDataImg(showItemData.itemId.img.img1) }}
                                                         src={showItemData.itemId.img.img1}
                                                         className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
                                                 </div>
                                                 <div>
-                                                    <img
+                                                    <Image width={100} height={100} 
                                                         onClick={() => { setShowItemDataImg(showItemData.itemId.img.img2) }}
                                                         src={showItemData.itemId.img.img2}
                                                         className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />
                                                 </div>
                                                 <div>
-                                                    <img
+                                                    <Image width={100} height={100}
                                                         onClick={() => { setShowItemDataImg(showItemData.itemId.img.img3) }}
                                                         src={showItemData.itemId.img.img3}
                                                         className="h-14 w-auto mx-0 rounded-lg cursor-pointer" alt="gallery-image" />

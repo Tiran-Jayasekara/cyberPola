@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import AdminService from '@/service/adminService'
 import { useRouter } from 'next/navigation';
 import { GlobalContext } from '@/app/context';
+import Image from 'next/image';
 
 const Shops = () => {
     const { getAllFarmers } = AdminService();
@@ -27,7 +28,7 @@ const Shops = () => {
     return (
         <>
             <div className='w-full'>
-                <img className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
+                <Image width={100} height={100} className='w-full h-auto' src='/assests/01.jpg' alt='No img' />
             </div>
             <h5 className=" text-center justify-center items-center text-xl md:text-4xl playfair-font mt-0 md:mt-0">Shops</h5>
             <div className='w-full flex flex-wrap mt-4'>
@@ -36,7 +37,7 @@ const Shops = () => {
 
                     <div key={index} className="m-4 w-40 md:w-80 mx-auto bg-white border hover:scale-105 transform transition-transform duration-300 ease-in-out border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <div>
-                            <img className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.shopImg} alt="product image" />
+                            <Image width={100} height={100} className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.shopImg} alt="product image" />
                         </div>
                         <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
                             <div>

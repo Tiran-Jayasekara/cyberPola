@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react'
 import UserService from '@/service/userService'
 import { toast } from 'react-toastify'
 import { GlobalContext } from '@/app/context'
+import Image from 'next/image'
 
 
 const UserLogin = () => {
@@ -40,7 +41,7 @@ const UserLogin = () => {
                 <div className='flex flex-col w-full'>
                     <div className="h-auto relative mx-auto justify-center items-center mt-10">
                         <div className="absolute inset-0 bg-black opacity-80 rounded-2xl "></div> {/* Overlay */}
-                        <img className='relative z-10 mx-auto w-40' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
+                        <Image width={100} height={100} className='relative z-10 mx-auto w-40' src='/assests/Logo.png' alt='logo' /> {/* Logo */}
                     </div>
 
                     <h1 className=' text-white playfair-font text-center md:text-4xl text-4xl font-bold mx-10 mt-20'>User Login</h1>

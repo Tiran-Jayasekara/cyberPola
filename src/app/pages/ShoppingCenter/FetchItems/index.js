@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ItemService from '@/service/itemService';
+import Image from 'next/image';
 
 const ItemList = ({ setShowItemData, setShowItemDataModel , setShowItemDataImg }) => {
     const [items, setItems] = useState([]);
@@ -11,12 +12,10 @@ const ItemList = ({ setShowItemData, setShowItemDataModel , setShowItemDataImg }
     let count = 0;
 
     useEffect(() => {
-        fetchItems(pageNumber); // Fetch items for initial page number
-        // Add event listener for scroll event
+        fetchItems(pageNumber);
         window.addEventListener('scroll', handleScroll);
-        // Cleanup function to remove event listener
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [pageNumber]); // Include pageNumber in the dependency array
+    });
 
 
     const fetchItems = async (page) => { // Accept pageNumber as a parameter
@@ -74,11 +73,11 @@ const ItemList = ({ setShowItemData, setShowItemDataModel , setShowItemDataImg }
                                 </>
                                 :
                                 <div className='absolute top-0 right-0'>
-                                    <img className='w-14' src='https://freepngimg.com/thumb/categories/1869.png' alt='sold Out' />
+                                    <Image width={100} height={100} className='w-14' src='/assests/soldout.png' alt='sold Out' />
                                     {/* <p className='text-right p-2 rounded-2xl bg-gray-100'>Sold Out</p> */}
                                 </div>
                             }
-                            <img className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
+                            <Image width={100} height={100} className="p-2 rounded-t-lg md:h-52 h-32 w-full" src={data.img.img1} alt="product image" />
                         </div>
                         <div className="px-5 pb-5 text-center justify-center items-center text-sm md:text-xl playfair-font">
                             <div>
