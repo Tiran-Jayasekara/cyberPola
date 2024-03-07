@@ -4,7 +4,7 @@ import axios from "axios";
 const UserService = () => {
 
     const http = axios.create({
-        baseURL: "https://cyberpola-backend.onrender.com",
+        baseURL: "http://localhost:3001",
         // process.env.REACT_APP_BASE_URL,
 
         headers: {
@@ -25,7 +25,9 @@ const UserService = () => {
 
     const userLogin = async (LoginForm) => {
         try {
+            console.log(LoginForm);
             const user = await http.post("user/UserLogin", LoginForm);
+            console.log(user);
             return user;
 
         } catch (error) {
@@ -33,9 +35,21 @@ const UserService = () => {
         }
     }
 
+    const GetUserData = async (userId) => {
+        try {
+            const user = await http.get("user/UserData/" + userId);
+            return user;
+
+        } catch (error) {
+            throw error
+        }
+    }
+
+
     return {
         userRegister,
-        userLogin
+        userLogin,
+        GetUserData
     }
 }
 
