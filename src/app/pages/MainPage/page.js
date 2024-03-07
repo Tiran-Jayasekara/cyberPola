@@ -23,6 +23,7 @@ const MainPage = () => {
 
                     {userData || farmer ? <button className='bg-green-600 playfair-font mt-20 text-white p-2 rounded-xl w-60 items-center mx-auto px-6 hover:bg-green-900' onClick={() => {
                         window.location.reload();
+                        localStorage.setItem('user', JSON.stringify(""));
                     }}>LogOut</button> : <>
                         <div className='flex flex-row mx-auto mt-20 text-white playfair-font'>
                             <button className='bg-green-600 p-2 rounded-xl px-6 mx-4 hover:bg-green-900' onClick={() => { router.push('/pages/UserLogin') }}>Login</button>
