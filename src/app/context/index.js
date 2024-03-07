@@ -5,6 +5,11 @@ import { createContext, useEffect, useState } from "react";
 
 export const GlobalContext = createContext(null);
 
+useEffect(()=>{
+  const storedUserData = localStorage.getItem('user');
+  setUserData(JSON.parse(storedUserData))
+},[])
+
 const GlobalState = ({ children }) => {
   const [shopName, setShopName] = useState("");
   const [farmer, setFarmer] = useState("");
