@@ -19,7 +19,7 @@ const UserLogin = () => {
         if (LoginUser.data.message === "Login Success") {
             setUserData(LoginUser.data.checkUser);
             localStorage.setItem('user', JSON.stringify(LoginUser.data.checkUser));
-            router.push('/pages/Profile')
+            router.push('/pages/UserProfile')
             toast.success(LoginUser.data.message, {
                 icon: '✅',
                 position: toast.POSITION.TOP_RIGHT,
