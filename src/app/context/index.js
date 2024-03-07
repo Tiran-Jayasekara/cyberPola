@@ -8,7 +8,7 @@ export const GlobalContext = createContext(null);
 const GlobalState = ({ children }) => {
   const [shopName, setShopName] = useState("");
   const [farmer, setFarmer] = useState("");
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState("");
   // const [availability, setAvailability] = useState(false);
   // const [adminDetails, setAdminDetails] = useState();
   // const [token, setToken] = useState();
