@@ -17,8 +17,8 @@ const UserLogin = () => {
     const Login = async () => {
         const LoginUser = await userLogin(loginForm)
         if (LoginUser.data.message === "Login Success") {
-            setUserData(LoginUser.data.checkUser._id);
-            router.push('/pages/UserProfile')
+            setUserData(LoginUser.data.checkUser);
+            router.push('/pages/Profile')
             toast.success(LoginUser.data.message, {
                 icon: '✅',
                 position: toast.POSITION.TOP_RIGHT,
