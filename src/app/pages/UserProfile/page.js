@@ -13,18 +13,15 @@ const UserProfile = () => {
     const [user, setUser] = useState();
 
     useEffect(() => {
-        getUserData();
+        getUsrData();
     })
 
-    const getUserData = async () => {
+    const getUsrData = async () => {
         if (userData) {
             const data = await GetUserData(userData);
             setUser(data.data.userData[0]);
             console.log(data.data.userData[0]);
-        } else {
-
-        }
-
+        } 
     }
 
     return (
