@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Screenshot 2024-03-17 181751](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/33cedf08-9b67-4550-ae6a-ca512bc36526)
+![Screenshot 2024-03-17 181807](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/1729229e-b0ae-4e2f-970b-eca6305bfb45)
+![Screenshot 2024-03-17 182008](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/d09c4e62-861b-4b1c-80a7-8a87779337b3)
+![Screenshot 2024-03-17 182020](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/9aea2bb6-db1b-4161-81ed-2a0daefdbc1a)
+![Screenshot 2024-03-17 182130](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/608ee330-eb51-4112-b4b3-32777c73f5d6)
+![Screenshot 2024-03-17 182139](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/44d81313-6de6-4b23-931a-c53361d9cec7)
+![Screenshot 2024-03-17 182200](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/c4ed42ee-da58-4665-a605-13c3f1faab4c)
+![Screenshot 2024-03-17 182218](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/93d8be8c-4c86-4339-9c21-ebb36d98301a)
+![Screenshot 2024-03-17 182307](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/069a3bdd-e6f0-478d-9026-96f0e05d8464)
+![Screenshot 2024-03-17 182329](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/b6df8ec3-07ad-4d18-911e-8cc6dcbe2e21)
+![Screenshot 2024-03-17 182400](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/c3cc1cd6-9678-4c80-aebc-0b3854503d03)
+![Screenshot 2024-03-17 182412](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/bc424e6b-9cdc-48b5-ad6b-ab0e0e28304e)
+![Screenshot 2024-03-17 182423](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/21446325-97c8-410c-8c5e-06ebd2ac4281)
+![Screenshot 2024-03-17 182449](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/62c6fbd1-021b-4f65-99e4-f8d242567086)
+![Screenshot 2024-03-17 182616](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/3897b806-f6aa-4bc6-b373-e6432403f634)
+![Screenshot 2024-03-17 182628](https://github.com/Tiran-Jayasekara/cyberPola/assets/70306643/0039456f-ebad-49ce-a184-e8fdeeed886a)
