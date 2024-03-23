@@ -4,8 +4,8 @@ import React from 'react'
 const ItemService = () => {
 
     const http = axios.create({
-        // baseURL: "https://cyberpola-backend.onrender.com",
-        baseURL: "http://192.168.1.185:3001",
+        baseURL: "https://cyberpola-backend.onrender.com",
+        // baseURL: "http://192.168.1.185:3001",
         // process.env.REACT_APP_BASE_URL,
 
         headers: {
