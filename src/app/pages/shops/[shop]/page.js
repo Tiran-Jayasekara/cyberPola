@@ -10,6 +10,9 @@ import { GlobalContext } from '@/app/context';
 import CartService from '@/service/cartService';
 import Image from 'next/image';
 
+import { analytics } from "../../../firebase/firebase-config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 const Shop = () => {
   const { getFarmerWithItems } = AdminService();
   const { addNewItem, deleteItem, getItemsByFarmerId, UpdateItem } = ItemService();
@@ -24,6 +27,10 @@ const Shop = () => {
   const [deleteItemModal, setDeleteItemModal] = useState(false);
   const { shopName } = useContext(GlobalContext);
   const { addItemToCart } = CartService();
+
+  const [coverImg, setCoverImg] = useState("");
+  const [img1, setImg1] = useState("");
+  const [img2, setImg2] = useState("");
 
   const temporyData = {
     itemName: "TiranJ",
@@ -66,6 +73,12 @@ const Shop = () => {
     }
   }
 
+  const setImages = () => {
+    setCoverImg("");
+    setImg1("");
+    setImg2("");
+  }
+
   const [ShowItemDataImg, setShowItemDataImg] = useState();
   const SelectOneItem = (data) => {
     setselectedItem(data);
@@ -76,13 +89,24 @@ const Shop = () => {
   // Add Items
   const AddItem = async () => {
     console.log(addItem);
+    const addAllData = {
+      ...addItem,
+      img: {
+        ...addItem.img,
+        img1: coverImg,
+        img2: img1,
+        img3: img2
+      }
+
+    }
     const isEmptyFields = Object.values(addItem).some(value => value === "TiranJ" || value === "");
     if (isEmptyFields) {
     } else {
-      console.log(addItem);
-      const itemData = await addNewItem(addItem);
+      console.log(addAllData);
+      const itemData = await addNewItem(addAllData);
       if (itemData) {
         setAddItemModal(false);
+        setImages()
         GetItemsByFarmerId();
         toast.success(itemData.data.message, {
           icon: '✅',
@@ -162,7 +186,7 @@ const Shop = () => {
       toast.error(cart.data.message, {
         position: toast.POSITION.TOP_RIGHT,
         icon: '❗',
-    });
+      });
     }
   }
 
@@ -171,6 +195,73 @@ const Shop = () => {
 
   const handleGetLocationClick = () => {
     setShowLargeMap(true);
+  };
+
+  const addImage = async (e) => {
+    console.log(e.target.id);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    console.log(file);
+
+    formData.append("image", file);
+    if (file != null) {
+      const fileref = ref(analytics, `newfiles/${file.name}`);
+      uploadBytes(fileref, file).then((data) => {
+        getDownloadURL(data.ref).then((url) => {
+          if (e.target.id === "coverImage") {
+            setCoverImg(url);
+          } else if (e.target.id === "img1") {
+            setImg1(url)
+          } else if (e.target.id === "img2") {
+            setImg2(url);
+          } else {
+          }
+        });
+      });
+    }
+  };
+
+
+  const imageUpload = async (e) => {
+    console.log(e.target.id);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    console.log(file);
+
+    formData.append("image", file);
+    if (file != null) {
+      const fileref = ref(analytics, `newfiles/${file.name}`);
+      uploadBytes(fileref, file).then((data) => {
+        getDownloadURL(data.ref).then((url) => {
+          if (e.target.id === "coverImage") {
+            setselectedItem({
+              ...selectedItem,
+              img: {
+                ...selectedItem.img,
+                img1: url,
+              }
+            })
+          } else if (e.target.id === "img1") {
+            setselectedItem({
+              ...selectedItem,
+              img: {
+                ...selectedItem.img,
+                img2: url,
+              }
+            })
+          } else if (e.target.id === "img2") {
+            setselectedItem({
+              ...selectedItem,
+              img: {
+                ...selectedItem.img,
+                img3: url,
+              }
+            })
+          } else {
+          }
+        });
+      });
+    }
   };
 
 
@@ -267,8 +358,117 @@ const Shop = () => {
                       <div className="md:mt-0 mt-0">
                         <div>
 
+                          <label className="block mb-2 text-sm font-medium text-gray-900 ml-4">Cover Image</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+
+                              {coverImg === "" ? (
+                                <>
+                                  <input
+                                    type="file"
+                                    id="coverImage"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={addImage}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview mr-4">
+                                  <Image
+                                    src={coverImg}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (setCoverImg(""))}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 1</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+                              {img1 === "" ? (
+                                <>
+
+                                  <input
+                                    type="file"
+                                    id="img1"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={addImage}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview">
+                                  <Image
+                                    src={img1}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (
+                                      setImg1("")
+                                    )}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 2</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+                              {img2 === "" ? (
+                                <>
+                                  <input
+                                    type="file"
+                                    id="img2"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={addImage}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview">
+                                  <Image
+                                    src={img2}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (
+                                      setImg2("")
+                                    )}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+
                           {addItemControls ? addItemControls.map((controlItem, index) => (
-                            <div className="px-4 mb-6" key={controlItem.id}>
+                            <div className="px-4 mb-6 mt-10" key={controlItem.id}>
                               <label className="block mb-2 text-sm font-medium">{controlItem.label}</label>
 
                               {(() => {
@@ -310,27 +510,7 @@ const Shop = () => {
                                         </select>
                                       </>
                                     );
-                                  case 'img1':
-                                  case 'img2':
-                                  case 'img3':
-                                    return (
-                                      <textarea
-                                        className={validateAddItemForm ? `block w-full border ${!addItem.img[controlItem.id] || addItem.img[controlItem.id] === "TiranJ" ? 'border-red-500' : 'border-stone-400'} md:w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white rounded` : "block w-full border 'border-stone-400' md:w-full px-4 py-3 mb-2 text-sm placeholder-gray-500 bg-white rounded"}
-                                        name=""
-                                        placeholder={controlItem.placeholder}
-                                        onChange={(event) => {
-                                          setAddItem({
-                                            ...addItem,
-                                            img: {
-                                              ...addItem.img,
-                                              [controlItem.id]: event.target.value,
-                                              farmerId: farmerId,
-                                              shopName: farmerData.shopName,
-                                            }
-                                          });
-                                        }}
-                                      />
-                                    );
+
                                   default:
                                     return (
                                       <input
@@ -405,8 +585,135 @@ const Shop = () => {
                     <div className="pt-8 px-2 bg-white">
                       <div className="md:mt-0 mt-0">
                         <div>
+
+                          <label className="block mb-2 text-sm font-medium text-gray-900 ml-4">Cover Image</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+
+                              {selectedItem.img.img1 === "" ? (
+                                <>
+                                  <input
+                                    type="file"
+                                    id="coverImage"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={imageUpload}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview mr-4">
+                                  <Image
+                                    src={selectedItem.img.img1}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (setselectedItem({
+                                      ...selectedItem,
+                                      img: {
+                                        ...selectedItem.img,
+                                        img1: "",
+                                      }
+                                    }))}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 1</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+                              {selectedItem.img.img2 === "" ? (
+                                <>
+
+                                  <input
+                                    type="file"
+                                    id="img1"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={imageUpload}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview">
+                                  <Image
+                                    src={selectedItem.img.img2}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (
+                                      setselectedItem({
+                                        ...selectedItem,
+                                        img: {
+                                          ...selectedItem.img,
+                                          img2: "",
+                                        }
+                                      })
+                                    )}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 2</label>
+                          <div className="cashier-input-field-style ml-4">
+                            <div className="single-input-field w-full single-input-field-file">
+                              {selectedItem.img.img3 === "" ? (
+                                <>
+                                  <input
+                                    type="file"
+                                    id="img2"
+                                    className=""
+                                    accept="image/*"
+                                    onChange={imageUpload}
+                                    required
+                                  />
+                                </>
+                              ) : (
+                                <div className="img_upload_preview">
+                                  <Image
+                                    src={selectedItem.img.img3}
+                                    alt="category Img"
+                                    width={500}
+                                    height={500}
+                                    style={{ width: "100%", height: "auto" }}
+                                  />
+                                  <button
+                                    onClick={() => (
+                                      setselectedItem({
+                                        ...selectedItem,
+                                        img: {
+                                          ...selectedItem.img,
+                                          img3: "",
+                                        }
+                                      })
+                                    )}
+                                    className="text-white bg-red-600 p-1 px-6 mt-4 rounded-xl"
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
                           {addItemControls.map((controlItem, index) => (
-                            <div className="px-4 mb-6" key={controlItem.id}>
+                            <div className="px-4 mb-6 mt-10" key={controlItem.id}>
                               <label className="block mb-2 text-sm font-medium">{controlItem.label}</label>
 
                               {(() => {

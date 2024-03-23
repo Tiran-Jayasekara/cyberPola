@@ -7,30 +7,7 @@ export const addItemControls = [
         label: "Item Name",
         componentType: "input",
     },
-    {
-        id: "img1",
-        type: "text",
-        placeholder: "Enter First image URL",
-        value: "img1",
-        label: "First Image URL",
-        componentType: "input",
-    },
-    {
-        id: "img2",
-        type: "text",
-        placeholder: "Enter secound image URL",
-        value: "img2",
-        label: "Secound Image URL",
-        componentType: "input",
-    },
-    {
-        id: "img3",
-        type: "text",
-        placeholder: "Enter Third image URL",
-        value: "img3",
-        label: "Third Image URL",
-        componentType: "input",
-    },
+
     {
         id: "price",
         type: "text",
