@@ -359,7 +359,7 @@ const Shop = () => {
                         <div>
 
                           <label className="block mb-2 text-sm font-medium text-gray-900 ml-4">Cover Image</label>
-                          <div className="cashier-input-field-style ml-4">
+                          <div className="cashier-input-field-style ml-4 mr-4">
                             <div className="single-input-field w-full single-input-field-file">
 
                               {coverImg === "" ? (
@@ -394,7 +394,7 @@ const Shop = () => {
                           </div>
 
                           <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 1</label>
-                          <div className="cashier-input-field-style ml-4">
+                          <div className="cashier-input-field-style ml-4 mr-4">
                             <div className="single-input-field w-full single-input-field-file">
                               {img1 === "" ? (
                                 <>
@@ -431,7 +431,7 @@ const Shop = () => {
                           </div>
 
                           <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 2</label>
-                          <div className="cashier-input-field-style ml-4">
+                          <div className="cashier-input-field-style ml-4 mr-4">
                             <div className="single-input-field w-full single-input-field-file">
                               {img2 === "" ? (
                                 <>
@@ -587,7 +587,7 @@ const Shop = () => {
                         <div>
 
                           <label className="block mb-2 text-sm font-medium text-gray-900 ml-4">Cover Image</label>
-                          <div className="cashier-input-field-style ml-4">
+                          <div className="cashier-input-field-style ml-4 mr-4">
                             <div className="single-input-field w-full single-input-field-file">
 
                               {selectedItem.img.img1 === "" ? (
@@ -628,7 +628,7 @@ const Shop = () => {
                           </div>
 
                           <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 1</label>
-                          <div className="cashier-input-field-style ml-4">
+                          <div className="cashier-input-field-style ml-4 mr-4 rounded-lg">
                             <div className="single-input-field w-full single-input-field-file">
                               {selectedItem.img.img2 === "" ? (
                                 <>
@@ -671,8 +671,8 @@ const Shop = () => {
                           </div>
 
                           <label className="block mb-2 text-sm ml-4 font-medium text-gray-900 mt-10">Image 2</label>
-                          <div className="cashier-input-field-style ml-4">
-                            <div className="single-input-field w-full single-input-field-file">
+                          <div className="cashier-input-field-style ml-4 mr-4">
+                            <div className="single-input-field w-full single-input-field-file rounded-xl">
                               {selectedItem.img.img3 === "" ? (
                                 <>
                                   <input
